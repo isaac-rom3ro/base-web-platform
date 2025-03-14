@@ -8,12 +8,12 @@
 
     if($signupError == "empty-inputs") {
         $emptyInputs = true;
+    } else if($signupError == "empty-username") {
+        $emptyUsername = true;
     } else if($signupError == "empty-password") {
         $username = $_GET["username"];
 
         $emptyPassword = true;
-    } else if($signupError == "empty-username") {
-        $emptyUsername = true;
     } else if($signupError == "username-exists") {
         $username = $_GET["username"];
 

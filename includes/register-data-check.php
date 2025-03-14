@@ -26,6 +26,8 @@
                     $insertNewUser->bindParam("user_name", $username);
                     $insertNewUser->bindParam("user_password", $hash);
                     $insertNewUser->execute();
+
+                    header("Location: ../pages/login.php");
                 }
             } catch(Exception $e) {
                 echo $e->getMessage();
