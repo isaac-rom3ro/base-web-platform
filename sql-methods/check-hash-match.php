@@ -1,13 +1,13 @@
 <?php
     function hashMatch($username, $stringPassword, $pdo) {
-        $selectLogin = $pdo->prepare("SELECT * FROM user_list WHERE user_name = :user_name");
-        $selectLogin->bindParam("user_name", $username);
-        $selectLogin->execute();
+        $selectInformations = $pdo->prepare("SELECT * FROM user_list WHERE user_name = :user_name");        
+        $selectInformations->bindParam("user_name", $username);
+        $selectInformations->execute();
 
-        $hashTest = password_hash($stringPassword, PASSWORD_DEFAULT);
+        $row = $selectInformations->fetch(PDO::FETCH_ASSOC);
+        $hashPassword = $row["user_password"];
+        
+        $isPasswordCorrect = (bool) password_verify($stringPassword, $hashPassword);
 
-        $fetchInfo = $selectLogin->fetch(PDO::FETCH_ASSOC);
-        $hashFromDatabase = $fetchInfo["user_password"];
-
-        echo "$hashTest \n $hashFromDatabase";
+        return $isPasswordCorrect;
     }

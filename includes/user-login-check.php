@@ -13,8 +13,6 @@
         } else if(!$isUsernameEmpty && $isPasswordEmpty) {
             header("Location: ../pages/login.php?signin=empty-password&username=$username");
         } else {
-            $stringPassword = $password;
-
             include_once "../connection/connection-pdo.php";
             include_once "../sql-methods/check-user-match.php";
 
@@ -22,8 +20,11 @@
                 header("Location: ../pages/login.php?signin=incorrect-username&username=$username");
             } else {
                 include "../sql-methods/check-hash-match.php";
-
-                hashMatch($username, $stringPassword, $pdo);
-            }
+                if(!hashMatch($username, $password, $pdo)) {
+                    header("Location: ../pages/login.php?signin=incorrect-password&username=$username");
+                } else {
+                    header("Location: ../pages/main.php");
+                }
         }
     }
+}

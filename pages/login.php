@@ -5,6 +5,7 @@
     $emptyUsername = false;
     $emptyPassword = false;
     $incorrectUsername = false;
+    $incorrectPassword = false;
 
     if($signinError == "empty-inputs") {
         $emptyInputs = true;
@@ -16,8 +17,12 @@
         $emptyPassword = true;
     } else if($signinError == "incorrect-username") {
         $username = $_GET["username"];
-
+        
         $incorrectUsername = true;
+    } else if($signinError == "incorrect-password") {
+        $username = $_GET["username"];
+
+        $incorrectPassword = true;
     }
 ?>
 
@@ -42,6 +47,8 @@
                 echo "<input name='username' type='text' value='$username' placeholder='Username'>";
             } else if($incorrectUsername) {
                 echo "<input name='username' class='error' type='text' value='$username' placeholder='Username'>";
+            } else if($incorrectPassword) {
+                echo "<input name='username' type='text' value='$username' placeholder='Username'>";
             }
         ?>
 
@@ -56,6 +63,8 @@
                 echo "<input name='password' class='error' type='password' placeholder='Password'>";
             } else if($incorrectUsername) {
                 echo "<input name='password' type='password' placeholder='Password'>";
+            } else if($incorrectPassword) {
+                echo "<input name='password' class='error' type='password' placeholder='Password'>";
             }
         ?>
         <button type="submit">Login</button>

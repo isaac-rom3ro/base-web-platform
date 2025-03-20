@@ -21,7 +21,7 @@
                     header("Location: ../index.php?signup=username-exists&username=$username");
                 } else {
                     $hash = password_hash($password, PASSWORD_DEFAULT);
-
+                    
                     $insertNewUser = $pdo->prepare("INSERT INTO user_list (user_name, user_password) VALUES (:user_name, :user_password)");
                     $insertNewUser->bindParam("user_name", $username);
                     $insertNewUser->bindParam("user_password", $hash);
